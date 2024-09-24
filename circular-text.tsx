@@ -20,9 +20,11 @@ export default function CircularText({
       const characters = (containerRef.current as any).querySelectorAll(
         ".char"
       );
+      const startAngle = 190; // Ángulo inicial
+      const angleStep = 360 / characters.length; // Espacio entre las letras
 
       characters.forEach((char: string, index: number) => {
-        const angle = (index / characters.length) * 360;
+        const angle = startAngle + index * angleStep; // Sumar el ángulo de cada letra
 
         // Coloca cada carácter en la posición correcta usando GSAP
         gsap.set(char, {
@@ -40,10 +42,10 @@ export default function CircularText({
       {text.split("").map((char, index) => (
         <span
           key={index}
-          className="char absolute uppercase font-bold text-black mix-blend-exclusion"
+          className="char absolute uppercase font-light text-primary mix-blend-exclusion"
           style={{
             fontSize,
-            rotate: `${(index / text.length) * 360}deg`,
+            rotate: `${(index / text.length) * 180}deg`,
             transformOrigin: "center center",
             letterSpacing: `${characterSpacing}px`,
           }}
