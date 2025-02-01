@@ -1,9 +1,7 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -14,12 +12,14 @@ import {
 import {
   Sheet,
   SheetContent,
-  SheetTrigger,
   SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
-import { useRouter, useSearchParams } from "next/navigation";
+import { Menu, Search } from "lucide-react";
 import Form from "next/form";
-import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import * as React from "react";
 
 import { Luxurious_Script } from "next/font/google";
 
@@ -66,16 +66,6 @@ export function Navbar() {
       </div>
 
       <div className="flex items-end">
-        {/* Search */}
-        <Form action={onSubmit} className="hidden md:flex mx-4 relative">
-          <Input
-            type="search"
-            name="search"
-            placeholder="Search..."
-            className="w-64"
-            defaultValue={searchParams.get("q") ?? ""}
-          />
-        </Form>
         {/* Desktop Navigation */}
         <div className="flex justify-center">
           <NavigationMenu>
@@ -94,6 +84,19 @@ export function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
+        {/* Search */}
+        <Form action={onSubmit} className="hidden md:flex mx-4 relative">
+          <Input
+            type="search"
+            name="search"
+            placeholder="Search..."
+            className="w-52 rounded-r-none"
+            defaultValue={searchParams.get("q") ?? ""}
+          />
+          <Button type="submit" className="rounded-l-none">
+            <Search />
+          </Button>
+        </Form>
       </div>
 
       {/* Mobile Navigation */}
@@ -105,15 +108,18 @@ export function Navbar() {
           </Button>
         </SheetTrigger>
         <SheetContent side="right" className="w-full sm:w-[300px] pt-16">
-          <SheetTitle>Navigation Menu</SheetTitle>
-          <Form action={onSubmit} className="mb-4">
+          <SheetTitle>Menu</SheetTitle>
+          <Form action={onSubmit} className="mb-4 flex">
             <Input
               type="search"
               name="search"
               placeholder="Search..."
-              className="w-full"
+              className="w-52 rounded-r-none"
               defaultValue={searchParams.get("q") ?? ""}
             />
+            <Button type="submit" className="rounded-l-none">
+              <Search />
+            </Button>
           </Form>
           <nav className="flex flex-col space-y-4">
             {menuItems.map((item) => (
